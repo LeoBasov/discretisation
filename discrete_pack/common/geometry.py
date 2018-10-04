@@ -21,6 +21,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 =============================================================================================
 '''
 
+import math
+
 class Cuboid:
 	"""Cuboid shaped domain"""
 	def __init__(self, xmin = 0.0, xmax = 1.0, ymin = 0.0, ymax = 1.0, zmin = 0.0, zmax = 1.0):
@@ -31,12 +33,10 @@ class Cuboid:
 		self.zmin = zmin
 		self.zmax = zmax
 
-		self.type = ''
-		self.temperature = 0.0
-		self.accommodation_factor = 1.0
-
 		self.volume = (self.xmax - self.xmin)*(self.ymax - self.ymin)*(self.zmax - self.zmin)
 		self.diagonal = math.sqrt((self.xmax - self.xmin)**2 + (self.ymax - self.ymin)**2 + (self.zmax - self.zmin)**2)
+
+		self.barycentre = (0.5*(self.xmax + self.xmin), 0.5*(self.ymax + self.ymin), 0.5*(self.zmax + self.zmin))
 
 	def check_if_inside(self, position):
 		"""Function used to check if position lies inside of domain"""
