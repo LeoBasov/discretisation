@@ -21,6 +21,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 =============================================================================================
 '''
 
+from discrete_pack.common.geometry import Cuboid
+
 class Octree:
 	def __init__(self):
 		self.main_leaf = Leaf()
@@ -29,6 +31,7 @@ class Leaf:
 	def __init__(self, parent = None):
 		self.parent = parent
 		self.children = [None]*8
+		self.geometry = Cuboid()
 		self.elements = []
 
 	def built_next_level(self, pivot_point):
