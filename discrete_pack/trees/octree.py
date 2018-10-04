@@ -39,7 +39,25 @@ class Leaf:
 		else:
 			self.level =  0
 
-	def built_next_level(self, pivot_point = None):
+	def __iter__(self):
+		self.child_no = 0
+		self.number_of_children = 8
+
+		return self
+
+	def __next__(self):
+		if self.child_no < self.number_of_children:
+			ret_child = self.children[self.child_no]
+			self.child_no += 1
+
+			return ret_child
+		else:
+			del(self.child_no)
+			del(self.number_of_children)
+
+			raise StopIteration
+
+	def build_next_level(self, pivot_point = None):
 		if self.children is not None:
 			raise Exception('Leaf.built_next_level', 'Leaf allready has children')
 		elif pivot_point is None:
