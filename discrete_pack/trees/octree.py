@@ -34,6 +34,11 @@ class Leaf:
 		self.geometry = geometry
 		self.elements = []
 
+		if parent is not None:
+			self.level = parent.level + 1
+		else:
+			self.level =  0
+
 	def built_next_level(self, pivot_point = None):
 		if self.children is not None:
 			raise Exception('Leaf.built_next_level', 'Leaf allready has children')
