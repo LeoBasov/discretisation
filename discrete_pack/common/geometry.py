@@ -45,3 +45,17 @@ class Cuboid:
 		inz = (position[2] <= self.zmax) and (position[2] >= self.zmin)
 
 		return inx and iny and inz
+
+	def subdivide(self, pivot_point):
+		ret_cuboids = [None]*8
+
+		ret_cuboids[0] = Cuboid(self.xmin     , pivot_point[0], self.ymin     , pivot_point[1], self.zmin     , pivot_point[2])
+		ret_cuboids[1] = Cuboid(pivot_point[0], self.xmax     , self.ymin     , pivot_point[1], self.zmin     , pivot_point[2])
+		ret_cuboids[2] = Cuboid(pivot_point[0], self.xmax     , pivot_point[1], self.ymax     , self.zmin     , pivot_point[2])
+		ret_cuboids[3] = Cuboid(self.xmin     , pivot_point[0], pivot_point[1], self.ymax     , self.zmin     , pivot_point[2])
+		ret_cuboids[4] = Cuboid(self.xmin     , pivot_point[0], self.ymin     , pivot_point[1], pivot_point[2], self.zmax)
+		ret_cuboids[5] = Cuboid(pivot_point[0], self.xmax     , self.ymin     , pivot_point[1], pivot_point[2], self.zmax)
+		ret_cuboids[6] = Cuboid(pivot_point[0], self.xmax     , pivot_point[1], self.ymax     , pivot_point[2], self.zmax)
+		ret_cuboids[7] = Cuboid(self.xmin     , pivot_point[0], pivot_point[1], self.ymax     , pivot_point[2], self.zmax)
+
+		return ret_cuboids
