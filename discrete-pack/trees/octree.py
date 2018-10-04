@@ -23,12 +23,13 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 class Octree:
 	def __init__(self):
-		self.main_leaf = None
-
-	def built_next_level(self):
-		pass
+		self.main_leaf = Leaf()
 
 class Leaf:
 	def __init__(self, parent = None):
 		self.parent = parent
 		self.children = [None]*8
+		self.elements = []
+
+	def built_next_level(self, pivot_point):
+		pass
