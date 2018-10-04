@@ -45,3 +45,14 @@ class Leaf:
 
 		for geo in sub_geometries:
 			self.children.append(Leaf(self, geo))
+
+	def sort_objects(self, objects_value_pairs):
+		rest_objects_value_pairs = []
+
+		for pair in objects_value_pairs:
+			if self.geometry.check_if_inside(pair[1]):
+				self.elements.append(pair[0])
+			else:
+				rest_objects_value_pairs.append(pair)
+
+		return rest_objects_value_pairs
