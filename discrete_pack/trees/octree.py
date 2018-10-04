@@ -28,11 +28,20 @@ class Octree:
 		self.main_leaf = Leaf()
 
 class Leaf:
-	def __init__(self, parent = None):
+	def __init__(self, parent = None, geometry = Cuboid()):
 		self.parent = parent
-		self.children = [None]*8
-		self.geometry = Cuboid()
+		self.children = None
+		self.geometry = geometry
 		self.elements = []
 
-	def built_next_level(self, pivot_point):
-		pass
+	def built_next_level(self, pivot_point = None):
+		if self.children is not None:
+			raise Exception('Leaf.built_next_level', 'Leaf allready has children')
+		elif pivot_point is None:
+			pivot_point = self.geometry.barycentre
+
+		sub_geometries = self.geometry.subdivide(pivot_point)
+		self.children = []
+
+		for geo in sub_geometries:
+			self.children.append(Leaf(self, geo))
