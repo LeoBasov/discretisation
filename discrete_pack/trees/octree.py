@@ -33,11 +33,14 @@ class Leaf:
 		self.children = None
 		self.geometry = geometry
 		self.elements = []
+		self.max_level = 0
 
 		if parent is not None:
 			self.level = parent.level + 1
 		else:
 			self.level =  0
+
+		self._adjust_max_level(self.level)
 
 	def __iter__(self):
 		self.child_no = 0
@@ -56,6 +59,14 @@ class Leaf:
 			del(self.number_of_children)
 
 			raise StopIteration
+
+	def _adjust_max_level(self, level):
+		if self.max_level < level:
+			self.max_level = level
+
+			if self.parent is not None:
+				self.parent._adjust_max_level(level)
+
 
 	def build_next_level(self, pivot_point = None):
 		if self.children is not None:
