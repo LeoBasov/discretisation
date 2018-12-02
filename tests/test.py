@@ -1,13 +1,6 @@
-import sys
-sys.path.append('../.')
+import unittest
 
-from discrete_pack.trees.octree import Octree
+from geometry_test import*
 
-def test():
-	tree = Octree()
-
-	print(60*'=')
-	print('> Discrete pack tree test')
-	print(60*'=')
-
-test()
+if __name__ == '__main__':
+	unittest.main()
