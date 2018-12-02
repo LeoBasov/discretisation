@@ -26,6 +26,11 @@ import math
 class Cuboid:
 	"""Cuboid shaped domain"""
 	def __init__(self, xmin = 0.0, xmax = 1.0, ymin = 0.0, ymax = 1.0, zmin = 0.0, zmax = 1.0):
+		self.set(xmin, xmax, ymin, ymax, zmin, zmax)
+
+	def set(self, xmin = 0.0, xmax = 1.0, ymin = 0.0, ymax = 1.0, zmin = 0.0, zmax = 1.0):
+		self._check_values(xmin, xmax, ymin, ymax, zmin, zmax)
+
 		self.xmin = xmin
 		self.xmax = xmax
 		self.ymin = ymin
@@ -37,6 +42,14 @@ class Cuboid:
 		self.diagonal = math.sqrt((self.xmax - self.xmin)**2 + (self.ymax - self.ymin)**2 + (self.zmax - self.zmin)**2)
 
 		self.barycentre = (0.5*(self.xmax + self.xmin), 0.5*(self.ymax + self.ymin), 0.5*(self.zmax + self.zmin))
+
+	def _check_values(self, xmin = 0.0, xmax = 1.0, ymin = 0.0, ymax = 1.0, zmin = 0.0, zmax = 1.0):
+		if xmax <= xmin:
+			raise Exception("In domain.Cuboid._calc_dx", "xmax = {}, xmin={}".format(xmax, xmin))
+		elif ymax <= ymin:
+			raise Exception("In domain.Cuboid._calc_dy", "ymax = {}, ymin={}".format(ymax, ymin))
+		elif zmax <= zmin:
+			raise Exception("In domain.Cuboid._calc_dz", "zmax = {}, zmin={}".format(zmax, zmin))
 
 	def check_if_inside(self, position):
 		"""Function used to check if position lies inside of domain"""
